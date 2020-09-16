@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="74885fcd-5db0-4e90-9ca5-dc4e51238ca5" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="mybatis_multitable" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$PROJECT_DIR$/../../apache-maven-3.5.2" />
+        <option name="userSettingsFile" value="$PROJECT_DIR$/../../apache-maven-3.5.2/conf/settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="#JAVA_INTERNAL" />
+  </component>
+  <component name="ProjectId" id="1UpmrTNC5A9SMYC2v1kPhqpl8ka" />
+  <component name="ProjectViewState">
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/resources/com/lagou/mapper" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.MybatisTest.mapperTest">
+    <configuration name="CacheTest.SecondLevelCache" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mybatis_multitable" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lagou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lagou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.lagou.test.CacheTest" />
+      <option name="METHOD_NAME" value="SecondLevelCache" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CacheTest.firstLevelCache" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mybatis_multitable" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lagou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lagou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.lagou.test.CacheTest" />
+      <option name="METHOD_NAME" value="firstLevelCache" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CacheTest.sLevelCache" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mybatis_multitable" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lagou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lagou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.lagou.test.CacheTest" />
+      <option name="METHOD_NAME" value="sLevelCache" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MybatisTest.mapperTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mybatis_multitable" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lagou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lagou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.lagou.test.MybatisTest" />
+      <option name="METHOD_NAME" value="mapperTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MybatisTest.pageHelperTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mybatis_multitable" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lagou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lagou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.lagou.test.MybatisTest" />
+      <option name="METHOD_NAME" value="pageHelperTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.MybatisTest.mapperTest" />
+        <item itemvalue="JUnit.MybatisTest.pageHelperTest" />
+        <item itemvalue="JUnit.CacheTest.SecondLevelCache" />
+        <item itemvalue="JUnit.CacheTest.sLevelCache" />
+        <item itemvalue="JUnit.CacheTest.firstLevelCache" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="74885fcd-5db0-4e90-9ca5-dc4e51238ca5" name="Default Changelist" comment="" />
+      <created>1576062109799</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1576062109799</updated>
+      <workItem from="1576062111317" duration="42437000" />
+      <workItem from="1576384642308" duration="6778000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="729" y="150" key="#com.intellij.ide.util.MemberChooser" timestamp="1576390990022">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state x="729" y="150" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1007@0.23.1920.1007" timestamp="1576390990022" />
+    <state width="1868" height="184" key="GridCell.Tab.0.bottom" timestamp="1576398229367">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state width="1868" height="184" key="GridCell.Tab.0.bottom/0.23.1920.1007@0.23.1920.1007" timestamp="1576398229367" />
+    <state width="1868" height="184" key="GridCell.Tab.0.center" timestamp="1576398229367">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state width="1868" height="184" key="GridCell.Tab.0.center/0.23.1920.1007@0.23.1920.1007" timestamp="1576398229367" />
+    <state width="1868" height="184" key="GridCell.Tab.0.left" timestamp="1576398229366">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state width="1868" height="184" key="GridCell.Tab.0.left/0.23.1920.1007@0.23.1920.1007" timestamp="1576398229366" />
+    <state width="1868" height="184" key="GridCell.Tab.0.right" timestamp="1576398229367">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state width="1868" height="184" key="GridCell.Tab.0.right/0.23.1920.1007@0.23.1920.1007" timestamp="1576398229367" />
+    <state width="1868" height="115" key="GridCell.Tab.1.bottom" timestamp="1576384638203">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state width="1868" height="115" key="GridCell.Tab.1.bottom/0.23.1920.1007@0.23.1920.1007" timestamp="1576384638203" />
+    <state width="1868" height="115" key="GridCell.Tab.1.center" timestamp="1576384638203">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state width="1868" height="115" key="GridCell.Tab.1.center/0.23.1920.1007@0.23.1920.1007" timestamp="1576384638203" />
+    <state width="1868" height="115" key="GridCell.Tab.1.left" timestamp="1576384638202">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state width="1868" height="115" key="GridCell.Tab.1.left/0.23.1920.1007@0.23.1920.1007" timestamp="1576384638202" />
+    <state width="1868" height="115" key="GridCell.Tab.1.right" timestamp="1576384638203">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state width="1868" height="115" key="GridCell.Tab.1.right/0.23.1920.1007@0.23.1920.1007" timestamp="1576384638203" />
+    <state x="554" y="134" width="838" height="1007" key="search.everywhere.popup" timestamp="1576389758573">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state x="554" y="134" width="838" height="1007" key="search.everywhere.popup/0.23.1920.1007@0.23.1920.1007" timestamp="1576389758573" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lagou/test/CacheTest.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lagou/test/CacheTest.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lagou/plugin/MyPlugin.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lagou/plugin/MyPlugin.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lagou/plugin/MyPlugin.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group 'org.springframework'
+version '5.1.12.BUILD-SNAPSHOT'
+
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(project(":spring-context"))
+    compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.8.6'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    
+}

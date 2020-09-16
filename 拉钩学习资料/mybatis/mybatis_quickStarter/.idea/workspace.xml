@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e80a22f7-9ded-4ffe-995a-846f9e02f9c7" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$PROJECT_DIR$/../../apache-maven-3.5.2" />
+        <option name="userSettingsFile" value="$PROJECT_DIR$/../../apache-maven-3.5.2/conf/settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="#JAVA_INTERNAL" />
+  </component>
+  <component name="ProjectId" id="1Uor0Jw20wMsOlfvDvhfHzcD9Yq" />
+  <component name="ProjectViewState">
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+  </component>
+  <component name="RunManager" selected="JUnit.MybatisTest.test7">
+    <configuration name="MybatisTest.test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mybatis_quickStarter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lagou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lagou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.lagou.test.MybatisTest" />
+      <option name="METHOD_NAME" value="test2" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MybatisTest.test4" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mybatis_quickStarter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lagou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lagou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.lagou.test.MybatisTest" />
+      <option name="METHOD_NAME" value="test4" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MybatisTest.test5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mybatis_quickStarter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lagou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lagou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.lagou.test.MybatisTest" />
+      <option name="METHOD_NAME" value="test5" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MybatisTest.test6" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mybatis_quickStarter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lagou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lagou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.lagou.test.MybatisTest" />
+      <option name="METHOD_NAME" value="test6" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MybatisTest.test7" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mybatis_quickStarter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lagou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lagou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.lagou.test.MybatisTest" />
+      <option name="METHOD_NAME" value="test7" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.MybatisTest.test7" />
+        <item itemvalue="JUnit.MybatisTest.test6" />
+        <item itemvalue="JUnit.MybatisTest.test4" />
+        <item itemvalue="JUnit.MybatisTest.test5" />
+        <item itemvalue="JUnit.MybatisTest.test2" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e80a22f7-9ded-4ffe-995a-846f9e02f9c7" name="Default Changelist" comment="" />
+      <created>1576033564272</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1576033564272</updated>
+      <workItem from="1576033565938" duration="12893000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="729" y="150" key="#com.intellij.ide.util.MemberChooser" timestamp="1576046964971">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state x="729" y="150" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1007@0.23.1920.1007" timestamp="1576046964971" />
+    <state x="635" y="227" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1576047626659">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state x="635" y="227" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1920.1007@0.23.1920.1007" timestamp="1576047626659" />
+    <state width="1868" height="184" key="GridCell.Tab.0.bottom" timestamp="1576061434640">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state width="1868" height="184" key="GridCell.Tab.0.bottom/0.23.1920.1007@0.23.1920.1007" timestamp="1576061434640" />
+    <state width="1868" height="184" key="GridCell.Tab.0.center" timestamp="1576061434639">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state width="1868" height="184" key="GridCell.Tab.0.center/0.23.1920.1007@0.23.1920.1007" timestamp="1576061434639" />
+    <state width="1868" height="184" key="GridCell.Tab.0.left" timestamp="1576061434639">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state width="1868" height="184" key="GridCell.Tab.0.left/0.23.1920.1007@0.23.1920.1007" timestamp="1576061434639" />
+    <state width="1868" height="184" key="GridCell.Tab.0.right" timestamp="1576061434640">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state width="1868" height="184" key="GridCell.Tab.0.right/0.23.1920.1007@0.23.1920.1007" timestamp="1576061434640" />
+    <state x="320" y="23" key="SettingsEditor" timestamp="1576034363622">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state x="320" y="23" key="SettingsEditor/0.23.1920.1007@0.23.1920.1007" timestamp="1576034363622" />
+    <state x="541" y="23" width="838" height="1032" key="search.everywhere.popup" timestamp="1576055935024">
+      <screen x="0" y="23" width="1920" height="1007" />
+    </state>
+    <state x="541" y="23" width="838" height="1032" key="search.everywhere.popup/0.23.1920.1007@0.23.1920.1007" timestamp="1576055935024" />
+  </component>
+</project>

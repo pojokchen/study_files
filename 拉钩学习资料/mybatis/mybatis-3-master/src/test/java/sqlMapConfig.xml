@@ -1,0 +1,7 @@
+<configuration>
+
+    <mappers>
+
+        <package name="com.lagou.mapper"/>
+    </mappers>
+</configuration>

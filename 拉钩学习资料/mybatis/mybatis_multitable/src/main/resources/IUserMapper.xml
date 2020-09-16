@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lagou.mapper.IUserMapper">
+
+    <cache></cache>
+
+    <resultMap id="userMap" type="com.lagou.pojo.User">
+        <result property="id" column="uid"></result>
+        <result property="username" column="username"></result>
+        <collection property="orderList" ofType="com.lagou.pojo.Order">
+            <result property="id" column="id"></result>
+            <result property="orderTime" column="orderTime"></result>
+            <result property="total" column="total"></result>
+        </collection>
+    </resultMap>
+
+    <select id="findAll" resultMap="userMap">
+        select * from user u left join orders o on u.id = o.uid
+    </select>
+
+
+
+    <resultMap id="userRoleMap" type="com.lagou.pojo.User">
+        <result property="id" column="userid"></result>
+        <result property="username" column="username"></result>
+        <collection property="roleList" ofType="com.lagou.pojo.Role">
+            <result property="id" column="roleid"></result>
+            <result property="roleName" column="roleName"></result>
+            <result property="roleDesc" column="roleDesc"></result>
+        </collection>
+    </resultMap>
+
+
+    <select id="findAllUserAndRole" resultMap="userRoleMap">
+        select * from user u left join sys_user_role ur on u.id = ur.userid
+										 left join sys_role r on r.id = ur.roleid
+    </select>
+</mapper>
