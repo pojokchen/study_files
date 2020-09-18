@@ -86,3 +86,283 @@ sudo apt-get install -y docker.io
 ### 4.1获取镜像
 
 ​	通过` docker pull NAME[:tag]`从默认仓库拉取镜像，tag相当于镜像的版本，如果不显示指定，则默认拉取latest版本。 
+
+```shell
+#拉取Ubuntu镜像，如果不指定标签，则拉取latest版本，该方式从默认的docker仓库拉取镜像
+ docker pull ubuntu
+
+#从指定的镜像仓库拉取镜像
+#从dl.dockerpool.com地址的5000端口拉取Ubuntu镜像，镜像版本为latest
+docker pull dl.dockerpool.com:5000/ubuntu
+```
+
+![image-20200917152130113](Docker学习.assets/image-20200917152130113.png)
+
+获取镜像后即可创建容器运行该镜像：
+
+```
+#运行Ubuntu镜像，运行容器后打开bash-shell
+docker run -t -i ubuntu /bin/bash
+```
+
+![image-20200917153249685](Docker学习.assets/image-20200917153249685.png)
+
+### 4.2查看镜像信息
+
+​	使用` docker images` 列出镜像。
+
+![image-20200917153837331](Docker学习.assets/image-20200917153837331.png)
+
+如图所示，当前本地存在两个镜像，一个是Ubuntu镜像，一个是hello-world镜像。
+
+​	使用` docker tag`给本地的镜像重新分配一个标签，主要用来辅助自身对镜像进行标识。
+
+```shell
+#将hello-world镜像重新分配标签为1.0
+docker tag hello-world:latest hello-world:1.0
+```
+
+![image-20200917154212156](Docker学习.assets/image-20200917154212156.png)
+
+**注意：虽说这里通过` docker images`查看到多个一个镜像，但是看它们的id是完全一致的，所以其实它们是同一个镜像，新增的那个相当于原镜像的一个快捷方式或引用。**
+
+​	使用` docker inspect`命令可以获取镜像的详情。
+
+```shell
+#获取Ubuntu镜像的详情，该命令返回一个json格式的展示，包含很多项
+docker inspect bb0eaf4eee00
+#通过增加-f参数来选取指定的信息项Architecture,获取其信息，bb0e为镜像id的前几位，和git一样
+docker inspect -f {{".Architecture"}} bb0e
+
+#获取Config项下的Tty信息
+docker inspect -f {{".Config.Tty"}} bb0e
+```
+
+```json
+[
+    {
+        "Id": "sha256:bb0eaf4eee00c28cb8ffd54e571dd225f1dd2ed8d8751b2835c31e84188bf2de",
+        "RepoTags": [
+            "ubuntu:latest"
+        ],
+        "RepoDigests": [
+            "ubuntu@sha256:cbcf86d7781dbb3a6aa2bcea25403f6b0b443e20b9959165cf52d2cc9608e4b9"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2020-09-16T22:20:25.950751723Z",
+        "Container": "6fbeb345a9d4f5184e942758ce74df682a834a8cc03e08b72c5c276cfaf8f05b",
+        "ContainerConfig": {
+            "Hostname": "6fbeb345a9d4",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "#(nop) ",
+                "CMD [\"/bin/bash\"]"
+            ],
+            "ArgsEscaped": true,
+            "Image": "sha256:048dce312876ab1dc014622ee7b415d9b6b9cefe00426ddde29f07ddd6f1c786",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "DockerVersion": "18.09.7",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "/bin/bash"
+            ],
+            "ArgsEscaped": true,
+            "Image": "sha256:048dce312876ab1dc014622ee7b415d9b6b9cefe00426ddde29f07ddd6f1c786",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": null
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 72873665,
+        "VirtualSize": 72873665,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/cb99ed62689afd9c763fc1e5b824ca0ed8ca95b914745f94afee80dd2f42fc92/diff:/var/lib/docker/overlay2/14e2e26fdc279cc08b7a343e851cd2e5152bef8febbbfc5d10a5417f7542fef8/diff",
+                "MergedDir": "/var/lib/docker/overlay2/4cdc90cc3ed3ea523389deb32c6100254cd964fe971a59a979b828256ffe4ec8/merged",
+                "UpperDir": "/var/lib/docker/overlay2/4cdc90cc3ed3ea523389deb32c6100254cd964fe971a59a979b828256ffe4ec8/diff",
+                "WorkDir": "/var/lib/docker/overlay2/4cdc90cc3ed3ea523389deb32c6100254cd964fe971a59a979b828256ffe4ec8/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:b2fd17df207168da45a6eefccbf58eca08d05b263b3eeb365b6e4b321b18cdc8",
+                "sha256:c0151ca45f2728482ee96827de759393d47cd5b6707c9f3b930cf46bd92f11b8",
+                "sha256:128fa0b0fb8154f33be04e9cda2c01e88c03cde4825081ed3e0c1858cb5a3431"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
+```
+
+### 4.3搜寻镜像
+
+​	使用` docker search`命令可以搜搜远端仓库中的镜像。在未配置的情况下默认搜索docker hub仓库中的镜像，该命令也可以有一些额外的参数选项：
+
+- --automated=false: 仅显示自动创建的镜像；
+- --no-trunc=false: 输出信息不截断显示；
+- -s,--starts=0: 仅显示评价为指定星级以上的镜像。
+
+```shell
+#搜搜mysql关键字镜像
+docker search mysql
+```
+
+![image-20200917161009485](Docker学习.assets/image-20200917161009485.png)
+
+### 4.4删除镜像
+
+​	使用` docker rmi [IMAGE...]`批量删除镜像，其中IMAGE可以为标签或ID。
+
+```shell
+#删除hello-world镜像(根据标签删除)
+ docker rmi hello-world:latest
+```
+
+![image-20200917161335911](Docker学习.assets/image-20200917161335911.png)
+
+可以从上图中看出，通过标签删除hello-world:latest镜像，原先使用`docker tag`命令创建的那个镜像标签hello-world:1.0还存在。
+
+而如果当前镜像存在引用的话，通过ID删除的时候，会出现下列情况：
+
+![image-20200917161655534](Docker学习.assets/image-20200917161655534.png)
+
+如果一定要想一次性删除这两个hello-world镜像，那么可以加上-f参数，代表强制删除。
+
+```shell
+#强制删除hello-world镜像（根据ID删除存在引用的情况）
+docker rmi -f bf756fb1ae65
+```
+
+同时，如果一个镜像已经创建了一个容器，那么该镜像正常也不能被删除，想要强制删除需要加上-f参数。
+
+### 4.5创建镜像
+
+​	创建镜像的方式有三种：
+
+- 基于已有镜像的容器创建
+- 基于本地模板导入
+- 基于Dockerfile创建
+
+#### 4.5.1基于已有镜像的容器创建
+
+​	该种形式主要使用` docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]`命令。其主要选项有：
+
+- -a,--author="": 其值为字符串，代表author，作者信息
+- -c, --change=[]:其值为list，代表将Dockerfile上的命令应用到该镜像上
+- -m,--message="":其值为字符串，创建镜像的描述信息
+- -p,--pause=false:创建容器的时候暂停运行中的容器,默认为true
+
+下面是创建一个镜像的流程：
+
+```shell
+
+#1.首先通过一个已有镜像启动一个容器,该容器的id生成为a5568137ef51
+ docker run -t -i ubuntu /bin/bash
+#2.在进入到这个容器的bash环境后，新建一个文本文件，此时该容器的镜像已不同于之前的镜像 
+touch text.txt
+#3.创建文件后即可退出容器
+#4.通过docker commit来创建一个新的镜像，创建的镜像来自于ID为a5568137ef51的容器，新创建的镜像名称为test，tag为latest
+docker commit -m="从容器创建一个test镜像" -a="cyz" -p=true a5568137ef51 test
+```
+
+![image-20200917171010289](Docker学习.assets/image-20200917171010289.png)
+
+#### 4.5.2基于本地模板导入
+
+​		基于本地模板导入也即从一个操作系统模板文件导入一个镜像。而本地模板其实是一个操作系统模板，可以在一些网站上进行模板下载，如：[openVZ](https://wiki.openvz.org/Download/template/precreated)，我们可以下载一个centOS7的模板来制作其镜像。
+
+​	导入本地模板制作镜像使用` docker import [OPTIONS] file|URL|- [REPOSITORY[:TAG]]`命令。
+
+```shell
+#导入本地centos系统模板制作镜像,要特别注意中间的'-'
+cat centos-7-x86_64.tar.gz | docker import - centos:latest
+```
+
+![image-20200918090625890](Docker学习.assets/image-20200918090625890.png)
+
+### 4.6存出和载入镜像
+
+​	可以使用` docker save`和` docker load`命令来完成镜像载出和存入操作。
+
+#### 4.6.1 存出镜像
+
+​	使用` docker save`来存出镜像。其语法为：` docker save [OPTIONS] IMAGE [IMAGE...]`，可选options为：
+
+- -o,--output:其值为string类型，将输出写入到一个文件，代替标准输出
+
+```shell
+#将centos:latest镜像存出为本地centos.tar包
+docker save -o="centos.tar" centos:latest
+#可选参数后面的=号可以替换成空格，都是一样的，对其他命令也生效
+docker save -o "centos.tar" centos:latest
+```
+
+![image-20200918091726128](Docker学习.assets/image-20200918091726128.png)
+
+在载出镜像后，原镜像文件还是存在的。
+
+#### 4.6.2载入镜像
+
+​	可以使用` docker load`从存出的本地文件中再导入到本地镜像库中。其语法为：`  docker load [OPTIONS]`，其中可选的options有：
+
+- -i,--input:其值为string，值为先前存出的本地文件
+- -q,--quiet：不进行载入输出
+
+```shell
+#载入存出的centos镜像
+ docker load --input centos.tar
+```
+
+​	` docker load`会将镜像本身及其元数据一起导入。
+
+### 4.7上传镜像
+
+​	使用` docker push`命令来上传镜像，默认上传到Docker Hub仓库。其具体的语法为：`  docker push [OPTIONS] NAME[:TAG]`，其中可选的options参数为：
+
+- --disable-content-trust：略过镜像签名，其值为Boolean类型，默认为true。
+
+## 5.容器详解
+
+​	容器是一个镜像的运行实例，相比于镜像来说，它具有额外的可写文件层。
+
+### 5.1创建容器
+
