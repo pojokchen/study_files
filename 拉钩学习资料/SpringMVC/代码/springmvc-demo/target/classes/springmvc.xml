@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd
+">
+
+    
+    <!--开启controller扫描-->
+    <context:component-scan base-package="com.lagou.edu.controller"/>
+
+
+    <!--配置springmvc的视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+    <!--
+        自动注册最合适的处理器映射器，处理器适配器(调用handler方法)
+    -->
+    <mvc:annotation-driven conversion-service="conversionServiceBean"/>
+
+
+    <!--注册自定义类型转换器-->
+    <bean id="conversionServiceBean" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.lagou.edu.converter.DateConverter"></bean>
+            </set>
+        </property>
+    </bean>
+
+
+    <!--静态资源配置，方案一-->
+    <!--
+        原理：添加该标签配置之后，会在SpringMVC上下文中定义一个DefaultServletHttpRequestHandler对象
+             这个对象如同一个检查人员，对进入DispatcherServlet的url请求进行过滤筛查，如果发现是一个静态资源请求
+             那么会把请求转由web应用服务器（tomcat）默认的DefaultServlet来处理，如果不是静态资源请求，那么继续由
+             SpringMVC框架处理
+    -->
+    <!--<mvc:default-servlet-handler/>-->
+
+
+
+    <!--静态资源配置，方案二，SpringMVC框架自己处理静态资源
+        mapping:约定的静态资源的url规则
+        location：指定的静态资源的存放位置
+
+    -->
+    <mvc:resources location="classpath:/"  mapping="/resources/**"/>
+    <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
+
+
+    <mvc:interceptors>
+        <!--拦截所有handler-->
+        <!--<bean class="com.lagou.edu.interceptor.MyIntercepter01"/>-->
+        
+        <mvc:interceptor>
+            <!--配置当前拦截器的url拦截规则，**代表当前目录下及其子目录下的所有url-->
+            <mvc:mapping path="/**"/>
+            <!--exclude-mapping可以在mapping的基础上排除一些url拦截-->
+            <!--<mvc:exclude-mapping path="/demo/**"/>-->
+            <bean class="com.lagou.edu.interceptor.MyIntercepter01"/>
+        </mvc:interceptor>
+
+
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.lagou.edu.interceptor.MyIntercepter02"/>
+        </mvc:interceptor>
+        
+    </mvc:interceptors>
+
+
+    <!--多元素解析器
+        id固定为multipartResolver
+    -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--设置上传文件大小上限，单位是字节，-1代表没有限制也是默认的-->
+        <property name="maxUploadSize" value="5000000"/>
+    </bean>
+
+</beans>

@@ -366,3 +366,72 @@ docker save -o "centos.tar" centos:latest
 
 ### 5.1创建容器
 
+​	Docker的容器是轻量级的，创建和删除都十分容易。
+
+​	可以使用` docker create`命令新建一个容器，也可以使用` docker start`命令来启动一个处于停止状态的容器。其中` docker create`的语法为：` docker create [OPTIONS] IMAGE [COMMAND] [ARG...]`
+
+```shell
+#从centos:latest镜像创建容器，其中/bin/bash就是上述的COMMAND选项
+docker create centos:latest /bin/bash
+```
+
+**在单纯的使用` docker create`命令时可能出现No command specified错误，此时可以通过` docker inspect`查看一下该镜像的详情，看看Cmd选项是否有值，如果为null就会出现该错误，此时需要指定/bin/bash 的COMMAND选项。**
+
+​	Docker 还可以使用` docker run`命令新建并启动一个容器。该命令等价于先执行`docker create`再执行` docker start`命令。
+
+```shell
+#下面命令启动Ubuntu容器并输出hello world后关闭容器
+docker run ubuntu /bin/echo 'hello world!'
+
+#下面的命令则在容器中启动一个bash终端
+#-t:让Docker分配一个伪终端并绑定到容器的标准输入上
+#-i:则让容器的标准输入保持打开
+#用户可以通过ctrl+d或者输入exit命令来退出容器内的终端，当输入exit退出后，容器也就终止运行了
+docker run -t -i ubuntu /bin/bash
+```
+
+当利用` docker run`来创建并启动容器时，Docker在后台运行的标准操作包括：
+
+- 检查本地是否存在指定的镜像，不存在就从公有仓库下载；
+- 利用镜像创建并启动一个容器；
+- 分配一个文件系统，并在只读的镜像层外面挂载一层可读可写层；
+- 从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去；
+- 从地址池配置一个IP给容器；
+- 执行用户指定的应用程序；
+- 执行完毕后容器被终止。
+
+更多的时候，想要让Docker以守护态运行，可以添加-d参数来实现。
+
+```shell
+#用Ubuntu镜像创建一个后台容器
+ docker run -d ubuntu /bin/sh -c "while true;do echo hello world;sleep 1;done"
+#使用docker ps查看容器
+docker ps
+```
+
+![image-20200918151313565](Docker学习.assets/image-20200918151313565.png)
+
+可以通过` docker logs [OPTIONS] CONTAINER`命令查看后台容器的运行输出。
+
+### 5.2终止容器
+
+​	使用` docker stop`命令来终止一个运行中的容器。其语法为：` docker stop [OPTIONS] CONTAINER [CONTAINER...]`，可以加一个-t参数，指定等待几秒后kill it。
+
+```shell
+#终止运行中的容器
+docker stop 529a
+```
+
+该命令的执行程序为，先向容器发送一个SIGTERM信号，等待一段时间后（默认为10秒），再发送SIGKILL信号终止容器。
+
+​	此外，如果容器中运行的所有应用程序都终止时，该容器也自动终止。
+
+​	可以使用` docker ps -a -q`来查看所有终止的容器的ID信息。
+
+​	同时容易也支持` docker start`和` docker restart` 操作。
+
+### 5.3 进入容器
+
+​	当容器处于后台运行的时候，可以通过一些命令来进入内部进行一些操作。可用的命令有` docker attach`,` docker exec`以及` nsenter`等。
+
+​	
