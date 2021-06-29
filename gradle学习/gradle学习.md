@@ -1,10 +1,28 @@
 # gradle学习
 
-## 介绍
+## 一、介绍
 
-​	gradle和ant和maven一样，是一款项目管理工具。它使用DSL语言来编写。
+​		gradle是一款开源的自动构建工具，类似于maven和ant，gradle的构建脚本由Groovy或者是Kotlin编写。
 
-## gradle的安装和配置
+1. Gradle是一款通用的构建工具。它可以用来构建任何软件，但是其有一个限制是它的依赖管理当前只能使用与maven和ivy兼容的存储仓库及文件系统，其它的诸如c语言等依赖的库是不支持的。
+
+2. Gradle的核心模块是任务。Gradle基于任务的概念创建了一个有向无环图，该图中包含一系列小任务,各任务之间存在依赖关系，通过运行在这个图上的任务来完成构建。
+
+   ![image-20210505014138645](gradle学习.assets/image-20210505014138645.png)
+
+   每个task本身包含三个方面：执行的动作、输入及输出。
+
+3. Gradle构建有一些固定的阶段。Gralde的构建一般经历三个阶段：
+
+   - 初始化：设置运行环境及决定运行目标。
+   - 配置任务视图，决定执行的任务及任务执行顺序。
+   - 执行任务试图。
+
+4. Gradle提供了多种方式来扩展构建。
+
+5. Gradle的构建脚本针对API进行操作。(因为Gradle是运行在JVM之上的，构建脚本中也可以使用标准的Java API)
+
+## 二、gradle的安装和配置
 
 ​	Windows下：
 
@@ -30,199 +48,475 @@ gradle -v
 
 即可查看是否gradle配置成功。（注意配置要在cmd窗口重启之后才能生效。）
 
-## 创建gradle项目
+## 三、构建Java应用
 
-如下图示：
+### 1.初始化任务
 
-![image-20200629202725592](gradle学习.assets/image-20200629202725592.png)
+#### 1.1使用初始化任务初始化项目
 
-在点击下一步后：
-
-![image-20200629202927995](gradle学习.assets/image-20200629202927995.png)
-
-在完成创建项目后，要对项目进行初始化，可通过如下图的配置来对项目初始化所用gradle进行一些配置：
-
-![image-20200629203353880](gradle学习.assets/image-20200629203353880.png)
-
-## gradle项目目录详解
+​	在一个空文件夹中，通过 ` gradle init`来初始化一个Gradle构建的项目。其执行(交互式执行)过程如下所示：
 
 ```
-├── .gradle 项目级别缓存目录
-│   ├── 4.8 某一版本的gradle的缓存目录
-│   ├── 4.9 
-│   └── ⋮
-├── build 项目构建打包的artifacts将会存放在该目录下
-├── gradle	
-│   └── wrapper  gradle的wrapper文件和相关jar包存放路径
-├── build.gradle or build.gradle.kts gradle的构建脚本文件
-├── gradle.properties 项目级别的gradle属性配置文件
-├── gradlew 使用gradle-wrapper的执行构建文件
-├── gradlew.bat 同上
-└── settings.gradle or settings.gradle.kts 项目配置文件（gradle用来记录项目的配置信息）
+
+$ gradle init    #执行初始化任务
+<-------------> 0% EXECUTING [68ms]
+
+Select type of project to generate:
+  1: basic
+  2: application
+  3: library
+  4: Gradle plugin
+Enter selection (default: basic) [1..4] 2
+
+<======-------> 0% EXECUTING [68ms]
+<======-------> 50% EXECUTING [272ms]
+   <======-------> 50% EXECUTING [366ms]
+<======-------> 50% EXECUTING [565ms]
+<======-------> 50% EXECUTING [767ms]
+EX<======-------> 50% EXECUTING
+<======-------> 50% EXECUTING [1s]
+
+
+Select implementation language:
+  1: C++
+  2: Groovy
+  3: Java
+  4: Kotlin
+  5: Scala
+  6: Swift
+Enter selection (default: Java) [1..6] 3
+
+<======-------> 50% EXECUTING [3s]
+<======-------> 50% EXECUTING [5s]
+<======-------> 50% EXECUTING [7s]
+------> 50% EXECUTING [4s]
+==Split functionality across multiple subprojects?:
+  1: no - only one application project
+  2: yes - application and library projects
+Enter selection (default: no - only one application project) [1..2] 1
+
+<======-------> 50% EXECUTING [7s]
+<======-------> 50% EXECUTING [9s]
+<======-------> 50% EXECUTING [11s]
+<======-------> 50% EXECUTING [12s]
+<======-------> 50% EXECUTING [14s]
+Select build script DSL:
+  1: Groovy
+  2: KotlinECUTING [15s]
+Enter selection (default: Groovy) [1..2] 1
+
+<======-------> 50% EXECUTING [15s]
+<======-------> 50% EXECUTING [17s]
+  <======-------> 50% EXECUTING [19s]
+   Select test framework:
+  1: JUnit 4
+  2: TestNG
+  3: Spock
+  4: JUnit Jupiter
+Enter selection (default: JUnit 4) [1..4] 1
+
+<======-------> 50% EXECUTING [19s]
+<======-------> 50% EXECUTING [21s]
+  Project name (default: gradle-study):
+
+<======-------> 50% EXECUTING [22s]s]
+<======-------> 50% EXECUTING [24s]
+  <======-------> 50% EXECUTING [26s]
+---<======-------> 50% EXECUTING [27s]
+Source package (default: gradle.study): com.cyz.demo   #这里输入包的路径
+<======-------> 50% EXECUTING [28s]
+<======-------> 50% EXECUTING [30s]
+  <======-------> 50% EXECUTING [32s]
+---<======-------> 50% EXECUTING [33s]
+<======-------> 50% EXECUTING [35s]s]
+<======-------> 50% EXECUTING [37s]
+I<======-------> 50% EXECUTING [39s]
+--<======-------> 50% EXECUTING [40s]
+
+> Task :init
+Get more help with your project: https://docs.gradle.org/7.0/samples/sample_building_java_applications.html
+
+BUILD SUCCESSFUL in 42s
+2 actionable tasks: 2 executed
 ```
 
-具体生成的Java项目的实例如下：(下图采用idea自动生成)
+通过该init任务生成的项目结构如下所示：
 
-![image-20200629205715371](gradle学习.assets/image-20200629205715371.png)
+```
+.
+|-- app
+|   |-- build.gradle	#gradle的构建脚本文件
+|   `-- src			#标准的Java源代码目录结构
+|       |-- main
+|       |   |-- java
+|       |   |   `-- com
+|       |   |       `-- cyz
+|       |   |           `-- demo
+|       |   |               `-- App.java
+|       |   `-- resources
+|       `-- test	#标准的Java测试源代码目录结构
+|           |-- java
+|           |   `-- com
+|           |       `-- cyz
+|           |           `-- demo
+|           |               `-- AppTest.java
+|           `-- resources
+|-- gradle		#生成的gradle wrapper文件存放位置
+|   `-- wrapper
+|       |-- gradle-wrapper.jar
+|       `-- gradle-wrapper.properties
+|-- gradlew			# gradle wrapper启动脚本
+|-- gradlew.bat		# gradle wrapper启动脚本
+`-- settings.gradle
+```
 
-## groovy简单上手
+#### 1.2.生成的settings.gradle文件
 
-### groovy基本输出语句
+​		通过init任务生成的settings.gradle文件如下所示：
 
-![image-20200629212032340](gradle学习.assets/image-20200629212032340.png)
+```
+/*
+ * This file was generated by the Gradle 'init' task.
+ *
+ * The settings file is used to specify which projects to include in your build.
+ *
+ * Detailed information about configuring a multi-project build in Gradle can be found
+ * in the user manual at https://docs.gradle.org/7.0/userguide/multi_project_builds.html
+ */
 
-### groovy中定义集合
+rootProject.name = 'gradle-study'
+include('app')
+```
 
-![image-20200629213904273](gradle学习.assets/image-20200629213904273.png)
+其中的含义为：
 
-### groovy中定义map
+- rootProject.name：该项设置为构建定义了一个固定的名称，如果是一个多人协作项目，可能会导致实际存放文件夹名称的改变，所以设置一个固定的构建名称，使之可以忽略实际目录名称。
+- include('app')：该项定义当前构建由一个名为xxx的子项目组成，该子项目中包含了**build.gradle**构建脚本，故可以通过include(...)来引入其它的子项目参与构建。
 
-![image-20200629213945057](gradle学习.assets/image-20200629213945057.png)
+#### 1.3.build.gradle文件
 
-### groovy中的闭包
+​	每个gradle项目(不论是单项目还是多项目)应用，都包含一个build.gradle文件，如下所示(列出了部分元素)：
 
-​	在gradle中，把groovy的一个闭包当作一个参数来使用。
-
-```groovy
-//闭包
-def d1 = {
-    println "hello 闭包"
+```
+plugins {
+    // 应用一个application插件，以支持使用Java构建CLI应用程序(命令行应用程序)
+    id 'application'
 }
 
-//带参数
-闭包
-def d2 = {
-    v ->
-    println "hello ${v}"
+repositories {
+    // 定义mavenCentral为依赖仓库
+    mavenCentral()
 }
 
-//定义一个方法，参数需要一个闭包
-//Closure是闭包类型
-def method1(Closure closure){
-    closure() //执行闭包的代码
+dependencies {
+    // 定义junit4作为测试依赖
+    testImplementation 'junit:junit:4.13.1'
+
+    // 定义应用程序使用的依赖
+    implementation 'com.google.guava:guava:30.0-jre'
 }
 
-//定义个方法，参数需要一个带参数的闭包
-def method2(Closure clourse){
-    closure("小马")
+application {
+    // 定义该应用程序的主启动类
+    mainClass = 'com.cyz.demo.App'
 }
-
-//调用method方法
-method1(d1)
-method2(d2)
 ```
 
-## gradle教程
+### 2.运行生成的程序
 
-### 创建构建扫描
+#### 2.1使用运行任务命令运行程序
 
-​	构建扫描脚本是一类可共享的、集中的配置记录，可以帮助人们更好的观察在构建过程中发生了什么，为什么这样做。
-
-​	运用构建扫描插件，我们可以推送自己的构建扫描脚本到 [https://scans.gradle.com](https://scans.gradle.com/) 。
-
-#### 自动应用构建扫描插件
-
-​	从grandle4.3版本之后，我们可以直接启用构建扫描，而不需要添加另外的配置在build.script中。
-
-​	当使用命令行参数 --scan后，即可将构建扫描插件自动的运用。如下所示：
+​	使用` gradle run`命令来运行刚才初始化的项目，Gradle通过在项目build.gradle脚本中application构建块中定义的mainClass知道了运行时主类所在位置，执行了` gradle run`命令便会通过该主类启动应用程序。
 
 ```
-$ ./gradlew build --scan
-> Task :compileJava
-> Task :processResources NO-SOURCE
-> Task :classes
-> Task :jar
-> Task :assemble
-> Task :compileTestJava
-> Task :processTestResources NO-SOURCE
-> Task :testClasses
-> Task :test
-> Task :check
-> Task :build
+gradle run
+Starting a Gradle Daemon, 1 incompatible and 1 stopped Daemons could not be reused, use --status for details
 
-BUILD SUCCESSFUL
-4 actionable tasks: 4 executed
-
-Publishing a build scan to scans.gradle.com requires accepting the Gradle Terms of Service defined at https://gradle.com/terms-of-service. Do you accept these terms? [yes, no] yes
-
-Gradle Terms of Service accepted.
-
-Publishing build scan...
-https://gradle.com/s/czajmbyg73t62
+> Task :app:run #执行了任务 run
+Hello World!
+BUILD SUCCESSFUL in 13s
+2 actionable tasks: 1 executed, 1 up-to-date
 ```
 
-​	当然，即使我们可以无需配置的自动运用的构建扫描。但是，我们依然可以对构建扫描的一些选项进行配置，可以在构建脚本或是初始化脚本中进行配置。
+**如果使用的是gradlew来执行任务，则在第一次执行时会有一点延迟，这是因为gradle在下载gradlew相关文件，下载后其位置将存放在~/.gradle/wrapper/dists文件夹下**。
 
-#### 为项目启动构建扫描
+#### 2.2捆绑应用程序
 
-​	从gradle2.x到5.x之间，我们需要应用com.gradle.build-scan插件在我们项目根目录下的build.script脚本中；而在gradle6.0之后，我们需要在settings脚本中应用com.gradle.enterprise插件。
-
-#### 同意license
-
-​	为了推送我们的build scan到一个构建网站，我们需要接受license。我们可以在命令行中处理，也可以在settings.gradle脚本中写明：
-
-```groovy
-plugins{
-    id "com.gradle.enterprise" 
-    version "3.3.4"
-}
-
-gradleEnterprise {
-    //配置企业服务地址
-    server = "https://gradle-enterprise.mycompany.com"
-    //默认情况下需要SSL认证，配置该属性后可以推送到未进行SSL认证的网站（不安全）
-    allowUntrustedServer = true
-    buildScan { //这个是在没有指定server的情况下，默认推送到gradle这个网站，这时需要同意license，否则每次推送时都会被询问
-        termsOfServiceUrl = 'https://gradle.com/terms-of-service'
-        termsOfServiceAgree = 'yes'
-    }
-}
-//这种配置方式在build.script文件和settings.script文件中都是可用的
-```
-
-### 新建一个gradle构建
-
-#### 初始化项目
-
-​	首先新建一个空的文件夹，该文件夹后续即为这个项目的根目录。然后进入这个文件夹中，然后执行gradle init命令，该命令用来将一个空的文件夹初始化为一个gradle项目，在执行完成之后，会在该空的文件夹中添加必要的gradle组件。初始化后的文件夹结构大致是这样的：
-
-```gradle
-gradle init
-```
-
-![image-20200703093043489](gradle学习.assets/image-20200703093043489.png)
-
-#### 创建任务
-
-​	gradle通过groovy语言来定义或配置一个任务。一个项目包含着许多的任务，每个任务完成一件特定的事情。
-
-​	gradle内置了一些任务库，我们可以直接使用，例如：copy任务。
-
-​	在build.gradle文件中，可以这样编写来创建一个任务：
-
-```groovy
-task copy(type: Copy, group: "Custom", description: "Copies sources to the dest directory") {
-    from "src"
-    into "dest"
-}
-//其中group和description是可以省略的。
-```
-
-​	通过执行命令来执行这个任务：
+​	在上面的build.gradle文件中plugins构建块定义了使用application插件，该插件中预先定义捆绑了一些任务，例如其中的文件归档任务，该任务的结果导致在app\build\distributions\目录下生成了相关归档文件，如下所示：
 
 ```
-./gradlew copy //执行copy任务
+$ ls app/build/distributions/
+app.tar  app.zip
 ```
 
-#### 应用插件
+## 四、构建Java或者JVM应用
 
-​	通过在build.gradle文件中写入plugins语法，可以应用一些基本的插件，plugins必须要写在文件的开头。
+### 1.基础
+
+​	Gradle的构建最重要的就是build.gradle脚本文件，一个最简单的构建脚本如下所示：
 
 ```groovy
 plugins {
-    id "base"
+    //定义项目应用的插件是Java库插件，该插件替代了原先的Java插件
+    id 'java-library' 
+}
+
+java {
+    toolchain {
+        //使用toolchain指定项目使用jdk版本
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
+//指定项目的version
+version = '1.2.1'
+```
+
+其中Java Library Plugin的应用同样捆绑了一些预定义的任务：
+
+- 编译源代码任务（）
+- 编译测试源代码任务
+- 测试任务
+- jar归档任务，打包一个.jar文件
+- javadoc任务
+
+虽说上述构建脚本中定义不是必须的，但是官方推荐的。
+
+### 2.通过Source sets定义源代码相关信息
+
+​	**Source sets**是Gradle为了支持Java应用构建而提出的一种新的概念。即对于Java应用来说，其源代码、资源文件通常逻辑性的按照类型(例如源代码、测试单元、集成测试)等来组织的，而每个逻辑单元都有其各自的依赖项、不同的类路径等。**构成Source sets的文件不必位于同一路径下**。
+
+​	**Source sets将编译的下述几个方面联系在了一起(即源集包含了下述几个方面)：**
+
+- 源文件在哪
+- 编译的类路径在哪及所需的依赖
+- 编译后的文件在哪
+
+基于**Source sets**的概念，Gradle对于Java应用的编译定义了如下几个任务，其包含在插件java-library插件中：
+
+![java sourcesets compilation](gradle学习.assets/java-sourcesets-compilation.png)
+
+![java sourcesets process resources](gradle学习.assets/java-sourcesets-process-resources.png)
+
+图中，绿色部分代表应用源集(Source sets)本身。
+
+Java库插件会自动的为项目或插件定义的每个源集——compile*SourceSet*Java创建一个编译任务；同样，对于项目中的资源文件源集(例如properties文件集合)，也会创建一个编译任务。
+
+**默认来说，Gradle对Source sets有一套约定的配置，包含源代码位置、测试代码位置、类路径、编译后文件位置等，其约定的配置为：**
+
+- 源代码：位于项目
+
+### 3.依赖管理
+
+#### 1.介绍
+
+​	Gradle内置了对依赖管理的支持，下图显示了Gradle对依赖管理的基本概念(引用Gradle官网)：
+
+![dependency management resolution](gradle学习.assets/dependency-management-resolution.png)
+
+#### 2.配置基础Gradle依赖管理
+
+​	Gradle基本的在build.gradle中提供了两个构建块用来配置Gradle的依赖管理。
+
+- repositories{} ：该构建块用来声明依赖项所使用的远程仓库，从上图可以看出，Gradle使用的远程仓库支持MAVEN仓库及IVY仓库。
+- dependencies {}：该构建块用来声明项目具体的依赖项，即依赖的jar包。
+
+下图展示了这两个构建块在build.gradle文件中的运用：
+
+```groovy
+repositories {
+    mavenCentral() //配置使用的远程仓库为mavenCentral
+}
+
+dependencies { //配置依赖项
+    //配置了一个hibernate依赖,配置上类似于maven，具有group、artifactId、version等信息
+    implementation 'org.hibernate:hibernate-core:3.6.7.Final' 
 }
 ```
 
-### 构建一个java库文件
+上面dependencies构建块中配置了implementation选项，该选项用来声明后面紧跟的依赖的作用域，可配置的选项有：
+
+- compileOnly:声明依赖只用于compile范围，不能用于runtime范围(**类似于provided，只编译且依赖不传递，不参与打包**)
+- implementation:声明依赖用于compile和runtime(**该选项限定声明的依赖只能当前项目访问，而依赖当前项目的项目是无法访问到该选项声明的依赖的相关方法的**)
+- runtimeOnly：声明依赖只用于runtime，不能用于compile(**类似于apk，只在打包时有效，不参与编译**)
+- testCompileOnly:声明依赖只用于测试compile
+- testImplementation:声明依赖用于测试compile和测试runtime
+- testRuntime:声明依赖只用于测试runtime
+
+**对于Java-library插件，额外的提供了两个配置项：**
+
+- api：声明依赖用于compile和runtime，**且该依赖可以参与依赖快递**
+- compileOnlyApi:声明依赖只用于compile而不参与runtime(打包时不包含)，**该依赖可以传递**
+
+#### 3.配置仓库地址
+
+1. ​	**添加自搭建的远程maven仓库**
+
+   ```groovy
+   repositories {
+       maven {
+           // 在这个位置查找POM文件或依赖项(通常来说只配置该项即可)
+           url "http://repo2.mycompany.com/maven2"
+           // 如果在上述地址只找到pom描述，而没有具体的jar，可配置jar存储的位置(该项配置是为了应对pom文件与jar分开存储)
+           artifactUrls "http://repo.mycompany.com/jars"
+           artifactUrls "http://repo.mycompany.com/jars2"
+       }
+   }
+   ```
+
+2. **添加本地maven仓库**
+
+   ```groovy
+   repositories {
+       mavenLocal()
+   }
+   ```
+
+   **Gradle拥有自己的依赖缓存，所以不需要特别声明本地仓库，从远端仓库解析拉取的依赖会缓存在gradle自身的缓存内**。
+
+   Gradle官方推荐在添加本地缓存之前仔细阅读https://docs.gradle.org/current/userguide/declaring_repositories.html#sec:case-for-maven-local。
+
+3. **配置maven仓库过滤选项**
+
+   ```groovy
+   repositories {
+       maven {
+           url "https://repo.mycompany.com/releases"
+           mavenContent {
+               releasesOnly() //声明该仓库只拉取release版本的jar
+           }
+       }
+       maven {
+           url "https://repo.mycompany.com/snapshots"
+           mavenContent {
+               snapshotsOnly() //声明该仓库只拉取snapshots版本的jar
+           }
+       }
+   }
+   ```
+
+4. 配置aliyun仓库--build.gradle
+
+   ```groovy
+   repositories {
+       maven { url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+       maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+   }
+   ```
+
+5. 配置aliyun仓库--init.gradle
+
+   ```
+   #在系统环境变量中配置GRADLE_USER_HOME属性，设置gradle的家目录
+   #在GRADLE_USER_HOME/.gradle/下创建init.gradle文件
+   allprojects{
+       repositories {
+           google()
+           def ALIYUN\_REPOSITORY\_URL = 'http://maven.aliyun.com/nexus/content/groups/public'
+           def ALIYUN\_JCENTER\_URL = 'http://maven.aliyun.com/nexus/content/repositories/jcenter'
+           all { ArtifactRepository repo ->
+               if(repo instanceof MavenArtifactRepository){
+                   def url = repo.url.toString()
+                   if (url.startsWith('https://repo1.maven.org/maven2')) {
+                       project.logger.lifecycle "Repository ${repo.url} replaced by $ALIYUN\_REPOSITORY\_URL."
+                       remove repo
+                   }
+                   if (url.startsWith('https://jcenter.bintray.com/')) {
+                       project.logger.lifecycle "Repository ${repo.url} replaced by $ALIYUN\_JCENTER\_URL."
+                       remove repo
+                   }
+               }
+           }
+           maven { url ALIYUN\_REPOSITORY\_URL }
+           maven { url ALIYUN\_JCENTER\_URL }
+       }
+   }
+   ```
+
+6. **自定义gradle插件仓库**
+
+   **注意，该配置需要在settings.gradle文件中配置**
+
+   ```groovy
+   pluginManagement {
+       repositories { //多个仓库之间按顺序查找
+           maven { //自定义maven插件仓库
+               url './maven-repo'
+           }
+           gradlePluginPortal() //gradle提供的插件仓库
+           ivy { //自定义ivy插件仓库
+               url './ivy-repo'
+           }
+       }
+   }
+   
+   
+   ```
+
+7. **统一配置整个项目的依赖仓库**
+
+   ​	如果项目中存在多个模块多个build.gradle文件，则可以在项目的settings.gradle文件中统一配置项目使用的依赖，而不用在每个build.gradle文件中配置。
+
+   ​	如果settings.gradle和build.gradle同时配置了依赖仓库，则build.gradle优先。
+
+   ```groovy
+   dependencyResolutionManagement {
+       repositories {
+           mavenCentral()
+       }
+   }
+   ```
+
+### 4.编译代码
+
+​	Gradle对项目结构有有默认的约定：
+
+- 源代码：*src/main/java*
+- 测试源代码：*src/test/java*
+
+#### 1.自定义文件及文件夹位置
+
+​		通过在build.gradle中配置源集，可以更改默认的源代码位置、资源文件位置、编译输出位置等。
+
+```groovy
+sourceSets {
+    main { //配置项目源代码路径
+         java {
+            srcDirs = ['src']
+         }
+    }
+
+    test { //配置项目测试代码路径
+        java {
+            srcDirs = ['test']
+        }
+    }
+}
+```
+
+如果不想更改项目默认的配置路径，而只是想将其它的路径作为源代码路径或测试代码路径添加到源集中，则可以使用如下配置：
+
+```groovy
+sourceSets {
+    main {
+        java {
+            srcDir 'thirdParty/src/main/java'
+        }
+    }
+}
+```
+
+**这里体现出gradle一种默认的约定，srcDirs设置属性将直接替换值；而采用srcDir方法将附加某种逻辑。**
+
+#### 2.定义编译选项
+
+​	compileJava` 和       `compileTestJava都属于JavaCompile类型的任务，可以通过JavaCompile提供的一些属性来更改编译选项，例如：
+
+```groovy
+compileJava {
+    options.incremental = true
+    options.fork = true
+    options.failOnError = false
+}
+```
 
