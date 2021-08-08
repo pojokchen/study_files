@@ -24,7 +24,7 @@ public interface WebMvcConfigurer {
     void addInterceptors(InterceptorRegistry var1);
  
     void addResourceHandlers(ResourceHandlerRegistry var1);
- 
+ 	//配置springmvc的跨域问题
     void addCorsMappings(CorsRegistry var1);
  
     void addViewControllers(ViewControllerRegistry var1);

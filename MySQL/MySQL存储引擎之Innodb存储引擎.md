@@ -81,11 +81,13 @@ quick
 
 ## (二)Innodb存储引擎
 
-​	Innodb存储引擎的特点总的来说包含以下几点：行锁设计、支持MVCC、支持外键、一致性非锁定读等等。
+​	Innodb存储引擎的特点总的来说包含以下几点：行锁设计、支持MVCC、支持外键、一致性非锁定读等等，Innodb整体架构如下：
 
-### 1. Innodb体系架构
+![InnoDB architecture diagram showing in-memory and on-disk structures.](Innodb存储引擎.assets/innodb-architecture.png)
 
-![img](Innodb存储引擎.assets/20180809164004621)
+从上图可以看出，Innodb存储引擎整体分为两部分：Innodb的内存体系和Innodb的磁盘体系，他们之间连接的桥梁即文件刷新相关操作。
+
+### 1. Innodb线程结构
 
 如图所示，Innodb存储引擎包含若干后台线程、重做日志缓冲以及多个内存块组成的内存池。其中：后台线程：负责刷新内存池中的数据，保证缓冲池中的数据是最近的数据；同时将已修改的数据刷新到磁盘。
 
@@ -160,7 +162,7 @@ show variables like 'innodb_purge_threads';
 
   
 
-### 2. 内存池
+### 2. Innodb内存结构
 
 #### 2.1 缓冲池
 
@@ -298,23 +300,59 @@ show engine innodb status；
 
 INDIVIDUAL BUFFER POOL INFO
 ----------------------
----BUFFER POOL 0				#标识实例是哪一个
-Buffer pool size   393216		 #当前实例所分配到的内存大小，数值是代表页数，实际大小为 393216 * 16KB = 6g
-Free buffers       392952		 #当前缓冲池实例中free列表大小，即还有392952个空闲页
-Database pages     263			 #当前LRU列表中页的数量
-Old database pages 0			 #当前LRU列表中old端页的数量
-Modified db pages  0			 #当前Flush列表中脏页的数量
-Pending reads      0			 #
+---BUFFER POOL 0				
+Buffer pool size   393216		 
+Free buffers       392952		 
+Database pages     263			 
+Old database pages 0			 
+Modified db pages  0			 
+Pending reads      0			 
 Pending writes: LRU 0, flush list 0, single page 0
-Pages made young 0, not young 0	  #表示LRU列表old区和young区数据的移动情况
-0.00 youngs/s, 0.00 non-youngs/s  #表示每秒page made young及page not made young的次数
+Pages made young 0, not young 0	  
+0.00 youngs/s, 0.00 non-youngs/s 
 Pages read 229, created 34, written 36
 0.00 reads/s, 0.00 creates/s, 0.00 writes/s
 No buffer pool page gets since the last printout
 Pages read ahead 0.00/s, evicted without access 0.00/s, Random read ahead 0.00/s
-LRU len: 263, unzip_LRU len: 0	 #LRU列表中页数，被压缩列表中页的数量，前者包含了后者
+LRU len: 263, unzip_LRU len: 0	
 I/O sum[0]:cur[0], unzip sum[0]:cur[0]
 ```
+
+| Name                         | Description                                                  |
+| :--------------------------- | :----------------------------------------------------------- |
+| Total memory allocated       | The total memory allocated for the buffer pool in bytes.     |
+| Dictionary memory allocated  | The total memory allocated for the `InnoDB` data dictionary in bytes. |
+| Buffer pool size             | The total size in pages allocated to the buffer pool.        |
+| Free buffers                 | The total size in pages of the buffer pool free list.        |
+| Database pages               | The total size in pages of the buffer pool LRU list.         |
+| Old database pages           | The total size in pages of the buffer pool old LRU sublist.  |
+| Modified db pages            | The current number of pages modified in the buffer pool.     |
+| Pending reads                | The number of buffer pool pages waiting to be read into the buffer pool. |
+| Pending writes LRU           | The number of old dirty pages within the buffer pool to be written from the bottom of the LRU list. |
+| Pending writes flush list    | The number of buffer pool pages to be flushed during checkpointing. |
+| Pending writes single page   | The number of pending independent page writes within the buffer pool. |
+| Pages made young             | The total number of pages made young in the buffer pool LRU list (moved to the head of sublist of “new” pages). |
+| Pages made not young         | The total number of pages not made young in the buffer pool LRU list (pages that have remained in the “old” sublist without being made young). |
+| youngs/s                     | The per second average of accesses to old pages in the buffer pool LRU list that have resulted in making pages young. See the notes that follow this table for more information. |
+| non-youngs/s                 | The per second average of accesses to old pages in the buffer pool LRU list that have resulted in not making pages young. See the notes that follow this table for more information. |
+| Pages read                   | The total number of pages read from the buffer pool.         |
+| Pages created                | The total number of pages created within the buffer pool.    |
+| Pages written                | The total number of pages written from the buffer pool.      |
+| reads/s                      | The per second average number of buffer pool page reads per second. |
+| creates/s                    | The average number of buffer pool pages created per second.  |
+| writes/s                     | The average number of buffer pool page writes per second.    |
+| Buffer pool hit rate         | The buffer pool page hit rate for pages read from the buffer pool vs from disk storage. |
+| young-making rate            | The average hit rate at which page accesses have resulted in making pages young. See the notes that follow this table for more information. |
+| not (young-making rate)      | The average hit rate at which page accesses have not resulted in making pages young. See the notes that follow this table for more information. |
+| Pages read ahead             | The per second average of read ahead operations.             |
+| Pages evicted without access | The per second average of the pages evicted without being accessed from the buffer pool. |
+| Random read ahead            | The per second average of random read ahead operations.      |
+| LRU len                      | The total size in pages of the buffer pool LRU list.         |
+| unzip_LRU len                | The length (in pages) of the buffer pool unzip_LRU list.     |
+| I/O sum                      | The total number of buffer pool LRU list pages accessed.     |
+| I/O cur                      | The total number of buffer pool LRU list pages accessed in the current interval. |
+| I/O unzip sum                | The total number of buffer pool unzip_LRU list pages decompressed. |
+| I/O unzip cur                | The total number of buffer pool unzip_LRU list pages decompressed in the current interval. |
 
 **Free buffers和Database pages之和可能不等于Buffer pool size大小。**因为Buffer pool size中的页还可能用于索引、哈希页等。
 
@@ -337,7 +375,11 @@ show variables like 'innodb_log_buffer_size';
 2. 每个事务提交时都会将重做日志缓冲刷新到重做日志文件；
 3. 当重做日志缓冲池小于1/2时，重做日志缓冲刷新到重做日志文件。
 
-#### 2.4 额外的内存池
+#### 2.4 change buffer
+
+​	
+
+#### 2.5 额外的内存池
 
 ​	在Innodb存储引擎中，内存的管理是通过一种内存堆的方式来进行管理的。
 
@@ -356,7 +398,11 @@ show variables like '%pool_size%';
 
 该额外内存大小Innodb并没有提供默认值，故而在实际应用中该值需结合实际情况自己设定。
 
-### 3. checkpoint技术
+### 3.Innodb磁盘体系
+
+
+
+### 4. checkpoint技术
 
 ​	当数据库发生DML操作，delete或者update数据时，缓冲池中的页即成了被修改的页，即**脏页**。
 
@@ -384,10 +430,56 @@ show variables like '%pool_size%';
 
   在Innodb存储引擎中，在以下几种情况下会发生fuzzy checkpoint：
 
-- 
+- Master Thread checkpoint：Master Thread基本上会每秒或每十秒操作时异步刷新(不会阻塞用户查询线程)一定比例脏页到磁盘上。
+- FLUSH_LRU_LIST checkpoint：此checkpoint是为了保证LRU列表中需要有一定的空闲页预留(默认1024个)，当检测线程(page cleaner Thread)检测到当前LRU列表中没有预留的空闲页，那么LRU列表会将列表尾端的部分页进行移出操作，而当移出的这些页中存在脏页时，就会触发checkpoint，故称为FLUSH_LRU_LIST checkpoint。
+
+```sql
+#查看LRU列表需预留页数值
+show variables like '%innodb_lru%';
+
++-----------------------+-------+
+| Variable_name         | Value |
++-----------------------+-------+
+| innodb_lru_scan_depth | 1024  |
++-----------------------+-------+
+```
+
+- Async/Sync Flush checkpoint ：此checkpoint是指重做日志文件不可用的情况，这时需要强制将一些脏页刷新回磁盘，而此时脏页是从脏页列表(Flush List)中选取的，其处理流程如下：
+
+```txt
+#将重做日志文件中LSN记为redo_lsn,将刷新到磁盘上最新页的LSN记为checkpoint_lsn
+则：
+	checkpoint_page = redo_lsn - checkpoint_lsn
+再定义以下的变量:
+async_writer_size = 75% * total_redo_log_file_size
+sync_writer_size = 90% * total_redo_log_file_size
+若有两个重做日志文件，每个重做日志文件大小为1GB
+此时 async_writer_size = 1.5gb
+	 sync_writer_size = 1.8gb
+则：
+1.当checkpoint_page < async_writer_size时，此时不用进行checkpoint
+2.当async_writer_size < checkpoint_page < sync_writer_size时,触发Async Flush，从Flush列表中刷新一部分脏页到磁盘，使得checkpoint_page < async_writer_size
+
+3.当checkpoint_page > sync_writer_size时,触发Sync Flush,从Flush列表中刷新一部分脏页到磁盘，使得使得checkpoint_page < async_writer_size
+
+上述两种触发checkpoint的方式都不会阻塞用户线程，因为是通过page cleaner thread来进行的
+```
+
+- Dirty page too mutch checkpoint：脏页数据太多，强制触发checkpoint刷新磁盘，该值由innodb_max_dirty_pages_pct控制，当脏页数量占据总数据页该百分比值时，强制触发checkpoint操作。
+
+```sql
+#查看强制刷新脏页最大比例
+show variables like '%innodb_max_dirty_pages_pct%';
+
++--------------------------------+-----------+
+| Variable_name                  | Value     |
++--------------------------------+-----------+
+| innodb_max_dirty_pages_pct     | 75.000000 |
+| innodb_max_dirty_pages_pct_lwm | 0.000000  |
++--------------------------------+-----------+
+```
 
 
 
 
 
-​	

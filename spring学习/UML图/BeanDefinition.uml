@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.springframework.beans.factory.config.BeanDefinition</OriginalElement>
+  <nodes>
+    <node x="0.0" y="160.0">org.springframework.beans.factory.support.RootBeanDefinition</node>
+    <node x="213.00000000000003" y="160.0">org.springframework.beans.factory.support.ChildBeanDefinition</node>
+    <node x="230.50000000000003" y="0.0">org.springframework.beans.factory.config.BeanDefinition</node>
+    <node x="199.50000000000003" y="80.0">org.springframework.beans.factory.support.AbstractBeanDefinition</node>
+    <node x="425.0" y="160.0">org.springframework.beans.factory.support.GenericBeanDefinition</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.springframework.beans.factory.support.AbstractBeanDefinition" target="org.springframework.beans.factory.config.BeanDefinition" relationship="REALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.springframework.beans.factory.support.RootBeanDefinition" target="org.springframework.beans.factory.support.AbstractBeanDefinition" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="96.5" y="135.0" />
+      <point x="309.0" y="135.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.springframework.beans.factory.support.ChildBeanDefinition" target="org.springframework.beans.factory.support.AbstractBeanDefinition" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.springframework.beans.factory.support.GenericBeanDefinition" target="org.springframework.beans.factory.support.AbstractBeanDefinition" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="531.5" y="135.0" />
+      <point x="309.0" y="135.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="false" x="292.5" y="575.5" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
